@@ -1,8 +1,8 @@
 ./Trabajo
 clientes.txt
 *.xlsx
-/TP1/Tp1/nbproject/private/
+/TP1/Tp1/nbproject/
 /TP1/Tp1/build/
-./nbproject
-build.xml
-manifest.mf
+/TP1/Tp1/build.xml
+/TP1/Tp1/manifest.mf
+
