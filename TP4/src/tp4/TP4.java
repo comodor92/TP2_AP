@@ -3,7 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package tp4;
+import java.io.IOException;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 /**
  *
  * @author User
@@ -37,8 +41,20 @@ public class TP4 {
         
         //Ejercicio2
         System.out.println("Ejercicio2");
+        String ubicacion = "C:\\Users\\User\\TP2_AP\\TP4\\Numeros.txt";
+        String operacion = "suma";
+        operacionEnArchivoTexto(ubicacion,operacion);
+        
+        //Ejercicio3
+        System.out.println("Ejercicio3");
+        String ubicacionEntrada = "C:\\Users\\User\\TP2_AP\\TP4\\Entrada.txt";
+        String ubicacionSalida = "C:\\Users\\User\\TP2_AP\\TP4\\Salida.txt";
+        //codificado/decodificado
+        String cambio = "codificado";
+        int salto = 1;
+        Enigma(ubicacionEntrada,ubicacionSalida,cambio,salto);
+        
     }
-    
     //Funcion para ordenar numeos por parametros
     private static void OrdenarNum(int[] numParaOrdenar,char direccion){
         int max = 0;
@@ -60,9 +76,9 @@ public class TP4 {
         }
         
         if(direccion == 'a'){
-            System.out.println(min+" "+med+" "+max);
+            System.out.println(min+" "+med+" "+max+"\n");
         }else if(direccion == 'd'){
-            System.out.println(max+" "+med+" "+min);
+            System.out.println(max+" "+med+" "+min+"\n");
         }
         
     }
@@ -84,4 +100,58 @@ public class TP4 {
         OrdenarNum(numerosParaOrdenar,direccion);
     }
     
+    //Funcion para operar en archivos de texto
+    private static void operacionEnArchivoTexto(String ubicacion,String operacion){
+        Path archivoNum = Paths.get(ubicacion);
+        int totalSuma= 0;
+        int totalMultiplicacion= 1;
+        int total;
+        
+        try {
+            for(String numString : Files.readAllLines(archivoNum)){
+                String arregloNum[] = numString.split(" ");
+                for(String num :arregloNum){
+                    int numTemp = Integer.parseInt(num);
+                    if(operacion.equals("suma")){
+                        totalSuma = totalSuma + numTemp;
+                    }else if(operacion.equals("multiplicacion")){
+                        totalMultiplicacion= totalMultiplicacion*numTemp;
+                    }
+                }                 
+            }
+        } catch (IOException ex) {
+            System.out.println("Oooooo");
+        }
+        total = (totalSuma-1) +totalMultiplicacion;
+        System.out.println("La "+operacion+" de los numeros en el archivo es: "+total+"\n");
+    }
+    
+    //funcion codificadora/decodificadora
+    private static void Enigma(String ubicacionEntrada,String ubicacionSalida,String cambio,int salto){
+        Path archivoEntrada = Paths.get(ubicacionEntrada);
+        Path archivoSalida = Paths.get(ubicacionSalida);
+        String codigo = "abcdefghijklmnñopqrstuvwxyz";
+        String codificado="";
+        
+        try {
+            for(String palabra:Files.readAllLines(archivoEntrada)){
+                for(int x = 0;x<palabra.length();x++){
+                    if(cambio.equals("codificado")){
+                        codificado = codificado +codigo.charAt(codigo.indexOf(palabra.charAt(x))+ salto);
+                    }else if(cambio.equals("decodificado")){
+                        if(palabra.charAt(x)=='a'){
+                            codificado = codificado + " ";
+                        }else{
+                            codificado = codificado +codigo.charAt(codigo.indexOf(palabra.charAt(x))- salto);   
+                        }
+                    }  
+                }
+            }
+            Files.writeString(archivoSalida,codificado);
+            System.out.println(cambio+" exitoso");
+        } catch (IOException ex) {
+            System.out.println("ERROR");
+        }
+        
+    }
 }
