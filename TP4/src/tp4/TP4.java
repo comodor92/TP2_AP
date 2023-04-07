@@ -15,28 +15,37 @@ public class TP4 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        System.out.println("Ejercicio1-a");
         int num1= 1, num2=2, num3=3;
         char direccion = 'd';
-        OrdenarNum(num1,num2,num3,direccion);
+        int numParaOrdenar[]={num1,num2,num3};
         
-        //Ejercicio1-b
-        System.out.println("Ejercicio1-b");
-        Scanner nums = new Scanner(System.in);
-        Scanner direccion = new Scanner(System.in);
-        System.out.println("Ingrese tres numeros separados por un espacio");
-        String numeros = nums.nextLine();
-        System.out.println(numeros);
+        ////Ejercicio1-a
+        //System.out.println("Ejercicio1-a");
+        //OrdenarNum(numParaOrdenar,direccion);
+        
+        ////Ejercicio1-b
+        //System.out.println("Ejercicio1-b");
+        //OrdenarNumConsola();
+        
+        //Ejercicio1-c
+        System.out.println("Ejercicio1-c");
+        if(numParaOrdenar.length==3&&(direccion=='a'||direccion=='d')){
+            OrdenarNum(numParaOrdenar,direccion);
+        }else{
+            OrdenarNumConsola();
+        }
+        
+        //Ejercicio2
+        System.out.println("Ejercicio2");
     }
     
-    private static void OrdenarNum(int num1,int num2,int num3,char direccion){
-        int numDesordenado[]={num1,num2,num3};
+    //Funcion para ordenar numeos por parametros
+    private static void OrdenarNum(int[] numParaOrdenar,char direccion){
         int max = 0;
         int med = 0;
         int min = 1000000;
         
-        for(int num : numDesordenado){
+        for(int num : numParaOrdenar){
             if(num > max){
                 max = num;
             }
@@ -44,7 +53,7 @@ public class TP4 {
                 min = num;
             }
         }
-        for(int num : numDesordenado){
+        for(int num : numParaOrdenar){
             if(num!=max&&num!=min){
                 med = num;
             }
@@ -56,6 +65,23 @@ public class TP4 {
             System.out.println(max+" "+med+" "+min);
         }
         
+    }
+    //funcion para ordenar numeros pedidos por consola
+    private static void OrdenarNumConsola(){
+        Scanner nums = new Scanner(System.in);
+        Scanner aod = new Scanner(System.in);
+        System.out.println("Ingrese tres numeros separados por un espacio");
+        String numeros = nums.nextLine();
+        System.out.println("Ingrese a por ascendente o d por decendiente");
+        String eleccion = aod.nextLine();
+        int cont = 0;
+        int numerosParaOrdenar[]=new int[3];
+        for(String numeroStr:numeros.split(" ")){
+            numerosParaOrdenar[cont]=Integer.parseInt(numeroStr);
+            cont++;
+        }
+        char direccion = eleccion.charAt(0);
+        OrdenarNum(numerosParaOrdenar,direccion);
     }
     
 }
