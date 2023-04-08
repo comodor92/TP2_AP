@@ -15,6 +15,9 @@ public class TP6 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Calculadora c = new Calculadora();
+        
+        System.out.println(c.sumar(10, 20));
     }
     
 }

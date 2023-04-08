@@ -74,10 +74,10 @@ public class CalculadoraTest {
     @org.junit.Test
     public void testMultiplicar() {
         System.out.println("multiplicar");
-        double num1 = 80.0;
-        double num2 = 3.0;
+        double num1 = 0.0;
+        double num2 = 0.0;
         Calculadora instance = new Calculadora();
-        double expResult = 240.0;
+        double expResult = 0.0;
         double result = instance.multiplicar(num1, num2);
         assertEquals(expResult, result, 0);
         // TODO review the generated test code and remove the default call to fail.
