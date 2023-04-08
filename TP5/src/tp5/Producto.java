@@ -18,6 +18,11 @@ public class Producto {
         this.codigo = codigo;
         this.precio = precio;
     }
+    
+    public Producto(String[] prod){
+        this.nombre = prod[0];
+        this.precio = Double.parseDouble(prod[1]);
+    }
 
     public String getNombre() {
         return nombre;

@@ -4,6 +4,11 @@
  */
 package tp5;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
 /**
  *
  * @author jorge
@@ -34,6 +39,28 @@ public class TP5 {
         
         System.out.println(carrito1.getTotal());
         
+        LeerListaDeCompras();
+        
+    }
+    
+    public static void LeerListaDeCompras(){
+        Path ldc = Paths.get("C:\\Users\\jorge\\TP2_AP\\TP5\\Lista de compras.txt");
+        Producto lista[] = new Producto[3];
+        int index = 0;
+        try {
+            for(String linea : Files.readAllLines(ldc)){
+                String item[] = linea.split(" ");
+                Producto prod = new Producto(item);
+                lista[index] = prod;
+                index++;
+            }
+        } catch (IOException ex) {
+            System.out.println("ERROR");
+        }
+        
+        Carrito carritoLista = new Carrito(lista);
+        carritoLista.calcularTotalLista();
+        System.out.println(carritoLista.getTotal());
     }
     
 }

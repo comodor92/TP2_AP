@@ -12,9 +12,15 @@ public class Carrito {
     private Producto prod1;
     private Producto prod2;
     private Producto prod3;
+    private Producto prodList[]= new Producto[3];
     private Double total;
     private Descuento desc= new Descuento("Sin descuento",0.0);
-
+    public Carrito(){
+        
+    }
+    public Carrito(Producto list[]){
+        this.prodList = list;
+    }
     public Producto getProd1() {
         return prod1;
     }
@@ -46,9 +52,7 @@ public class Carrito {
     public void setDesc(Descuento desc) {
         this.desc = desc;
     }
-    
-    
-    
+
     public Double getTotal() {
         return total;
     }
@@ -56,6 +60,17 @@ public class Carrito {
     public void calcularTotal() {
         this.total = prod1.getPrecio()+prod2.getPrecio()+prod3.getPrecio();
         this.total = this.total-(this.total*desc.getDescuento());
+    }
+    
+    public void calcularTotalLista(){
+        double suma = 0;
+        for(Producto prod: prodList){
+            suma = suma+prod.getPrecio();
+        }
+        
+        this.total = suma;
+        this.total = this.total-(this.total*desc.getDescuento());
+
     }
     
 }
